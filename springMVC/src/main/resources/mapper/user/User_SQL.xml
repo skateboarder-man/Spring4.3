@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.spring.mvc.user.service.impl.UserMapper">
+
+	<resultMap id="user" type="co.spring.mvc.user.service.UserVO">
+		<result property="memberId" column="member_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+	</resultMap>
+	
+	<resultMap id="depart" type="co.spring.mvc.user.service.DepartVO">
+		<result property="departmentId" column="department_id"/>
+		<result property="departmentName" column="department_name"/>
+	</resultMap>
+
+
+	<select id="getDepartmentList" resultType="egovMap">
+		SELECT
+			*
+		FROM DEPARTMENT
+		WHERE 1=1
+	</select>
+
+
+</mapper>
