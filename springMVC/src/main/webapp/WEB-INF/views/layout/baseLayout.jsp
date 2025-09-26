@@ -11,15 +11,22 @@
  <body>
  
  	<header id="header">
-       <tiles:insertAttribute name="header" />
+       	<tiles:insertAttribute name="header" />
    </header>
 
-   <main id="body">
-       <tiles:insertAttribute name="body" />
+   <main>
+       	<tiles:insertAttribute name="body" />
+   </main>
+   
+   <main id="main" class ="main">
+	   <div class="d-flex align-items-start">
+	   		<tiles:insertAttribute name="menu" />
+	       	<tiles:insertAttribute name="main" />
+	   </div>
    </main>
 
    <footer id="footer">
-       <tiles:insertAttribute name="footer" />
+       	<tiles:insertAttribute name="footer" />
    </footer>
  
  </body>

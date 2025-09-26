@@ -15,5 +15,12 @@ public class PageController {
 	public String register() throws Exception {
 		return "register.page";
 	}
+	
+	@GetMapping("/main")
+	public String main() throws Exception {
+		return "main.mainPage";
+	}
+	
+	
 
 }
