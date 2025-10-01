@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+		http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" >
 	<display-name>egov.sample</display-name>
+	
+	<filter>
+    	<filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>springSecurityFilterChain</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
     
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -25,10 +35,21 @@
 		<filter-name>HTMLTagFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-    
+	
+	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:egovframework/spring/context-*.xml</param-value>
+		<param-value>
+			classpath*:egovframework/spring/context-security.xml
+		</param-value>
+	</context-param>
+	
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:egovframework/spring/context-*.xml
+		</param-value>
 	</context-param>
     
 	<listener>

@@ -16,13 +16,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
 	
+	
 	private final UserService userService;
 
-	
-	@PostMapping(value = "/getDepartmentList.do")
-	@ResponseBody
-	public Map<String, Object> getDepartmentList (@RequestBody Map<String,Object> requestData ) throws Exception {
-		return userService.getDepartmentList();
-	}
 
 }

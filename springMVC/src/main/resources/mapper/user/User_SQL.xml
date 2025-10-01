@@ -22,6 +22,39 @@
 		FROM DEPARTMENT
 		WHERE 1=1
 	</select>
+	
+	<insert id="singUp" parameterType="userVO">
+		INSERT INTO MEMBER (
+			user_id
+			, password
+		  	, name
+		  	, email
+		  	, department_id
+		  	, is_deleted
+		  	, created_at
+		  	, user_grade
+		  	, fail_cnt
+		)
+		VALUES (
+			#{userId}
+			, #{password}
+			, #{name}
+			, #{email}
+			, #{departmentId}
+			, 'N'
+			, NOW()
+			, 'user'
+			, 0
+		)
+	</insert>
+	
+	<select id="IdCnt" parameterType="userVO" resultType="int">
+		SELECT
+			COUNT(user_id)
+		FROM MEMBER
+		WHERE 1=1
+			AND user_id = #{userId}
+	</select>
 
 
 </mapper>

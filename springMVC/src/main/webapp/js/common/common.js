@@ -17,10 +17,10 @@ const makeSelectBox = (id, firstOp, data) =>{
 const departmentSelectBox = (id, firstOp) =>{
 	
 	$.ajax({
-		url:"/getDepartmentList.do"
+		url:"/public/getDepartmentList.do"
 		, contentType:"application/json; charset=utf-8"
-		, type:"POST"
-		, data: JSON.stringify({})
+		, type:"GET"
+		, data: null
 		, dataType: "json"
 		, async : true
 		, success: function(response){
@@ -39,3 +39,12 @@ const departmentSelectBox = (id, firstOp) =>{
 		}
 	})
 };
+
+
+const formToJson = (formArray) =>{
+	var jsonObj = {};
+	$.each(formArray, (index,value) => {
+		jsonObj[value.name]=value.value;
+	});
+	return jsonObj;
+}
