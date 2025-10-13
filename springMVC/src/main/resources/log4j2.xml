@@ -7,20 +7,20 @@
         </Console>
     </Appenders>
     <Loggers>
-     	<Logger name="org.springframework.security" level="INFO" additivity="false">
+     	<Logger name="org.springframework.security" level="DEBUG" additivity="false">
             <AppenderRef ref="console"/>
         </Logger>
         <Logger name="java.sql" level="INFO" additivity="false">
             <AppenderRef ref="console" />
         </Logger>
-        <Logger name="egovframework" level="DEBUG" additivity="false">
+        <Logger name="egovframework" level="INFO" additivity="false">
             <AppenderRef ref="console" />
         </Logger>
-        <Logger name="co.spring.mvc" level="DEBUG" additivity="false">
+        <Logger name="co.spring.mvc" level="INFO" additivity="false">
             <AppenderRef ref="console" />
         </Logger>
         
-        <Logger name="org.egovframe" level="DEBUG" additivity="false">
+        <Logger name="org.egovframe" level="INFO" additivity="false">
             <AppenderRef ref="console" />
         </Logger>
           <!-- log SQL with timing information, post execution -->

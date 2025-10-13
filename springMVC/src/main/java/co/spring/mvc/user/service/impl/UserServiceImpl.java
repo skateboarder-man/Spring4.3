@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl extends EgovAbstractServiceImpl implements UserService{
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
-	/** SampleDAO */
 	private final UserMapper userDAO;
 	private final PasswordEncoder passwordEncoder;
 	
@@ -88,14 +87,21 @@ public class UserServiceImpl extends EgovAbstractServiceImpl implements UserServ
 	public Map<String, Object> checkId(UserVO userVO) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String,Object>();
 		
-		int IdCnt = userDAO.IdCnt(userVO); // 아이디 중복검사
+		if(userVO.getUserId() =="" || userVO.getUserId() ==null) {
+			resultMap.put("msg","필수값 누락되었습니다.");
+			resultMap.put("code","400"); 
+			return resultMap;
+		}
 		
+		int IdCnt = userDAO.IdCnt(userVO); // 아이디 중복검사
+					
 		if(IdCnt > 0) {
 			resultMap.put("msg","같은아이디가 존재 합니다.");
 			resultMap.put("code","500"); 
 			return resultMap;
 		}
-		resultMap.put("code","200"); 
+		resultMap.put("code","200");
+		resultMap.put("msg","사용가능한 아이디 입니다.");
 		return resultMap;
 	}
 		

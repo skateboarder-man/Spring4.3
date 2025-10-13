@@ -65,7 +65,11 @@ const singUp = () => {
 							return 
 						}
 						
-						makeSelectBox(id, firstOp, response.data);
+						alert('회원가입 완료되었습니다.')
+						
+						window.location.href = "/";
+						
+						//makeSelectBox(id, firstOp, response.data);
 						
 					}
 					, error: function(request, status, error){
@@ -77,10 +81,10 @@ const singUp = () => {
 }
 
 
-const checkId = () => {
+ const checkId = () => {
 	
-	cont jsonData={
-			"userId" : $('#userId').val()
+	const jsonData = {
+			"userId" : $("#userId").val()
 	}
 	
 	$.ajax({
@@ -95,6 +99,8 @@ const checkId = () => {
 					if(response.code !='200'){
 						alert('MESSAGE: '+ response.msg +'ERROR_CODE: '+response.code)
 						return 
+					}else{
+						alert('MESSAGE: '+ response.msg +'ERROR_CODE: '+response.code)
 					}
 					
 					console.log(response);
@@ -104,8 +110,7 @@ const checkId = () => {
 					console.log(error);
 					console.log(request);
 				}
-			})
-	 });
+			});
 }
 
 

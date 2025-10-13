@@ -33,10 +33,12 @@ public class UserVO {
 	
     private int departmentId;
 	
-    private boolean isDeleted;
+    private String isDeleted;
     
     private Timestamp createdAt;
     
     private Timestamp updatedAt;
+    
+    private String lockUser;
 
 }

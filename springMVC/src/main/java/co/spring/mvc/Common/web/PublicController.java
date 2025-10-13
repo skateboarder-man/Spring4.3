@@ -37,5 +37,5 @@ public class PublicController {
 	public Map<String, Object> checkId (@RequestBody UserVO userVO) throws Exception {
 		return userService.checkId(userVO);
 	}
-
+	
 }

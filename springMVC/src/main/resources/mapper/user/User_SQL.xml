@@ -2,19 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.spring.mvc.user.service.impl.UserMapper">
 
-	<resultMap id="user" type="co.spring.mvc.user.service.UserVO">
+	<resultMap id="userInfo" type="co.spring.mvc.user.service.UserVO">
 		<result property="memberId" column="member_id"/>
 		<result property="userId" column="user_id"/>
 		<result property="password" column="password"/>
 		<result property="name" column="name"/>
 		<result property="email" column="email"/>
+		<result property="failCnt" column="fail_cnt"/>
+		<result property="isDeleted" column="is_deleted"/>
+		<result property="lockUser" column="lock_user"/>
+		
 	</resultMap>
 	
-	<resultMap id="depart" type="co.spring.mvc.user.service.DepartVO">
+	<!-- <resultMap id="depart" type="co.spring.mvc.user.service.DepartVO">
 		<result property="departmentId" column="department_id"/>
 		<result property="departmentName" column="department_name"/>
 	</resultMap>
-
+ -->
 
 	<select id="getDepartmentList" resultType="egovMap">
 		SELECT
@@ -34,6 +38,7 @@
 		  	, created_at
 		  	, user_grade
 		  	, fail_cnt
+		  	, lock_user
 		)
 		VALUES (
 			#{userId}
@@ -45,6 +50,7 @@
 			, NOW()
 			, 'user'
 			, 0
+			,'N'
 		)
 	</insert>
 	
@@ -54,7 +60,68 @@
 		FROM MEMBER
 		WHERE 1=1
 			AND user_id = #{userId}
+			AND is_deleted ='N'
 	</select>
+	
+	<select id="findByUser" parameterType="String" resultMap="userInfo">
+		SELECT
+			member_id
+			, user_id
+			, password
+			, name
+			, email
+			, fail_cnt
+			, is_deleted
+			, lock_user
+		FROM MEMBER
+		WHERE 1=1
+			AND user_id = #{value}
+			AND is_deleted ='N'
+	</select>
+	
+	<update id="incrementFailureCount" parameterType="String">
+		UPDATE MEMBER SET
+			fail_cnt = fail_cnt + 1
+		WHERE 1=1
+			AND user_id = #{value}
+			AND is_deleted ='N'
+	</update>
+	
+	<select id="getFailureCount" parameterType="String" resultType="int">
+		SELECT
+			fail_cnt
+		FROM MEMBER
+		WHERE 1=1
+			AND	user_id = #{value}
+			AND is_deleted ='N'
+	</select>
+	
+	<update id ="lockUserAccount" parameterType="String">
+		UPDATE MEMBER SET
+			lock_user = 'Y'
+		WHERE 1=1
+			AND user_id = #{value}
+			AND is_deleted ='N'
+	</update>
+	
+	<select id ="checkUserExists" parameterType="String" resultType="Boolean">
+		SELECT
+			COUNT(1)
+		FROM MEMBER
+		WHERE 1=1
+			AND user_id = #{value}
+			AND is_deleted ='N'
+	</select>
+	
+	<update id ="resetFailCountAndUnlockUser" parameterType="String">
+		UPDATE MEMBER SET
+			fail_cnt = 0
+			, lock_user = 'N'
+		WHERE 1=1
+			AND user_id = #{value}
+			AND is_deleted ='N'
+	
+	</update>
 
 
 </mapper>

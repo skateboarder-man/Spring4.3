@@ -16,4 +16,16 @@ public interface UserMapper {
 
 	int IdCnt(UserVO userVO) throws Exception;
 
+	UserVO findByUser(String username) ; // Spring Security의 계약에 따라 오직 **UsernameNotFoundException**만을 던지도록 선언
+
+	int incrementFailureCount(String username);
+	
+	int getFailureCount(String username);
+
+	int lockUserAccount(String username);
+
+	boolean checkUserExists(String username);
+
+	int resetFailCountAndUnlockUser(String username);
+
 }
