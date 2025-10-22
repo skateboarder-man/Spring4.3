@@ -69,8 +69,6 @@ const singUp = () => {
 						
 						window.location.href = "/";
 						
-						//makeSelectBox(id, firstOp, response.data);
-						
 					}
 					, error: function(request, status, error){
 						console.log(error);

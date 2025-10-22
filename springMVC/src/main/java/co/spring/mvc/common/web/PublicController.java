@@ -1,4 +1,4 @@
-package co.spring.mvc.Common.web;
+package co.spring.mvc.common.web;
 
 import java.util.Map;
 
